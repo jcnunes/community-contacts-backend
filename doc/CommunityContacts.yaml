@@ -1,0 +1,202 @@
+swagger: '2.0'
+info:
+  title: Community Contacts API
+  description: Get community contacts through REST
+  version: 0.0.1
+host: api.communitycontacts.local
+schemes:
+  - https
+securityDefinitions:
+  bearer:
+    type: apiKey
+    in: header
+    name: Authorization
+    description: JWT based authentication
+basePath: /v1
+produces:
+  - application/json
+paths:
+  /contact/list:
+    get:
+      summary: Contacts List
+      description: |
+        Get contacts list.
+      security:
+          - bearer: []
+      tags:
+        - Contacts
+      responses:
+        '200':
+          description: A list of Contacts
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Contact'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /contact/details:
+    get:
+      summary: Contact Details
+      description: |
+        Get contact details.
+      security:
+          - bearer: []
+      parameters:
+        - name: contact_id
+          in: query
+          description: Unique ID of the contact.
+          required: true
+          type: string
+      tags:
+        - Contacts
+      responses:
+        '200':
+          description: Details of a Contact
+          schema:
+            $ref: '#/definitions/ExtendedContact'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /community/theming:
+    get:
+      summary: Community Theming
+      description: |
+        Get community theming parameters.
+      security:
+          - bearer: []
+      tags:
+        - Theming
+      responses:
+        '200':
+          description: An array of theming properties
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Theme'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /login:
+    post:
+      summary: User Login
+      description: Endpoint for user authorizing within the application.
+      parameters:
+        - name: auth_details
+          in: body
+          description: Authentication details.
+          required: true
+          schema:
+            $ref: '#/definitions/AuthDetails'
+      tags:
+        - User
+      responses:
+        '200':
+          description: Authentication token
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /me:
+    get:
+      summary: User Profile
+      description: The User Profile endpoint returns information about the user that has authorized within the application.
+      tags:
+        - User
+      responses:
+        '200':
+          description: Profile information for a user
+          schema:
+            $ref: '#/definitions/Profile'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+  AuthDetails:
+    type: object
+    properties:
+      user_id:
+        description: Unique identifier of the user at the community contacts user directory.
+        type: string
+      user_secret:
+        description: User's secret at the community contacts user directory.
+        type: string
+  Profile:
+    type: object
+    properties:
+      user_id:
+        type: string
+        description: Unique identifier of the user at the community contacts user directory.
+      first_name:
+        type: string
+        description: First name of the user.
+      last_name:
+        type: string
+        description: Last name of the user.
+      email:
+        type: string
+        description: Email address of the user.
+  Contact:
+    type: object
+    properties:
+      contact_id:
+        type: string
+        description: Unique identifier of the contact at the community contacts user directory.
+      first_name:
+        type: string
+        description: First name of the contact.
+      last_name:
+        type: string
+        description: Last name of the contact.
+      email:
+        type: string
+        description: Email address of the contact.
+      main_number:
+        type: string
+        description: Main fix or mobile number of the contact.
+  ContactDetail:
+    type: object
+    properties:
+      key:
+        type: string
+        description: Unique identifier for the Contact Detail.
+      label:
+        type: string
+        description: Label for the Contact Detail.
+      value:
+        type: string
+        description: Value for the Contact Detail.
+  ExtendedContact:
+    type: object
+    properties:
+      base_contact:
+        $ref: '#/definitions/Contact'
+      details:
+        type: array
+        items:
+          $ref: '#/definitions/ContactDetail'
+  Theme:
+    type: object
+    properties:
+      community_logo:
+        type: string
+        description: Image URL representing the community logo.
+      community_style:
+        type: string
+        description: Basic style definitions, in accordance with definitions, for the community.
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      fields:
+        type: string
