@@ -16,7 +16,7 @@ basePath: /v1
 produces:
   - application/json
 paths:
-  /contact/list:
+  /contacts/:
     get:
       summary: Contacts List
       description: |
@@ -36,7 +36,7 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-  /contact/details:
+  /contacts/{contact_id}:
     get:
       summary: Contact Details
       description: |
@@ -45,7 +45,7 @@ paths:
           - bearer: []
       parameters:
         - name: contact_id
-          in: query
+          in: path
           description: Unique ID of the contact.
           required: true
           type: string
@@ -80,7 +80,7 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-  /login:
+  /users/login:
     post:
       summary: User Login
       description: Endpoint for user authorizing within the application.
@@ -102,7 +102,7 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-  /me:
+  /users/me:
     get:
       summary: User Profile
       description: The User Profile endpoint returns information about the user that has authorized within the application.

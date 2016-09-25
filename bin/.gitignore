@@ -1,0 +1,13 @@
+# Specifies intentionally untracked files to ignore when using Git
+# http://git-scm.com/docs/gitignore
+
+# Ignore everything
+*
+
+# But not these files...
+!.gitignore
+!www
+# etc...
+
+# ...even if they are in subdirectories
+!*/
