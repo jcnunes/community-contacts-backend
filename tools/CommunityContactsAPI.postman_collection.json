@@ -1,0 +1,136 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Community Contacts API",
+		"_postman_id": "669514d8-c0f7-5047-f631-39a1ffd6af6b",
+		"description": "Get community contacts through REST",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "community",
+			"description": "Folder for community",
+			"item": [
+				{
+					"name": "Community Theming",
+					"request": {
+						"url": "{{server}}/v1/community/theming",
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "Get community theming parameters.\n"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "contact",
+			"description": "Folder for contact",
+			"item": [
+				{
+					"name": "Contacts List",
+					"request": {
+						"url": "{{server}}/v1/contacts/",
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "Get contacts list.\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Contact Details",
+					"request": {
+						"url": "{{server}}/v1/contacts/JustinORobinson@dayrep.com",
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "Get contact details.\n"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"description": "Folder for users",
+			"item": [
+				{
+					"name": "User Profile",
+					"request": {
+						"url": "{{server}}/v1/users/me",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": "The User Profile endpoint returns information about the user that has authorized within the application."
+					},
+					"response": []
+				},
+				{
+					"name": "User Login",
+					"request": {
+						"url": "{{server}}/v1/users/login",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "joana.nunes228@gmail.com",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "password",
+									"value": "joana",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": "Endpoint for user authorizing within the application."
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
